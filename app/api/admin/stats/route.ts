@@ -1,0 +1,2 @@
+import {getUserId} from "@/lib/auth";import {prisma} from "@/lib/prisma";
+export async function GET(){const id=await getUserId();if(!id)return Response.json({error:"Niste prijavljeni."},{status:401});const user=await prisma.user.findUnique({where:{id}});if(!user||user.email!==process.env.ADMIN_EMAIL)return Response.json({error:"Nemate pristup."},{status:403});const [users,games,messages,participants]=await Promise.all([prisma.user.count(),prisma.game.count(),prisma.message.count(),prisma.participant.count()]);return Response.json({users,games,messages,participants});}

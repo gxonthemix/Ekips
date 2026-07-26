@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String         @id @default(cuid())
+  name        String
+  email       String         @unique
+  password    String
+  city        String         @default("Zagreb")
+  bio         String         @default("")
+  reliability Int            @default(100)
+  rating      Float          @default(5)
+  gamesHosted Game[]         @relation("Host")
+  memberships Participant[]
+  messages    Message[]
+  notifications Notification[]
+  settings    Setting?
+  createdAt   DateTime       @default(now())
+}
+
+model Game {
+  id          String        @id @default(cuid())
+  title       String
+  category    String
+  startsAt    DateTime
+  location    String
+  city        String
+  description String        @default("")
+  rules       String        @default("")
+  capacity    Int
+  visibility  String        @default("public")
+  hostId      String
+  host        User          @relation("Host", fields: [hostId], references: [id], onDelete: Cascade)
+  participants Participant[]
+  messages    Message[]
+  createdAt   DateTime      @default(now())
+}
+
+model Participant {
+  id        String   @id @default(cuid())
+  userId    String
+  gameId    String
+  status    String   @default("joined")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@unique([userId, gameId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  body      String
+  userId    String
+  gameId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  game      Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  read      Boolean  @default(false)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id                 String  @id @default(cuid())
+  userId             String  @unique
+  pushNotifications  Boolean @default(true)
+  gameReminders      Boolean @default(true)
+  messages           Boolean @default(true)
+  invites            Boolean @default(true)
+  showOnline          Boolean @default(true)
+  showDistance        Boolean @default(true)
+  profileVisibility  String  @default("everyone")
+  gameVisibility     String  @default("nearby")
+  user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
