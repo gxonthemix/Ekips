@@ -1,22 +1,25 @@
 # EKIPS
 
-EKIPS je full-stack responsive web aplikacija za pronalazak, organiziranje i pridruživanje lokalnim druženjima uz društvene igre.
+EKIPS je web aplikacija za pronalazak ljudi u blizini koji žele igrati
+društvene igre. Projekt je nastao iz jednostavnog problema: ekipi često
+nedostaje još jedan igrač za belu, Catan ili neku drugu igru.
 
-## Funkcionalnosti
-- registracija, prijava i sigurna HTTP-only sesija
-- pretraživanje i filtriranje aktivnih igara
-- organiziranje događaja i pridruživanje
-- detalji događaja, sudionici i grupni chat
-- korisnički profil, pouzdanost i postavke privatnosti
-- obavijesti i osnovni administratorski pregled
-- PostgreSQL baza, Prisma ORM, Docker i Railway konfiguracija
-- responsive desktop/mobile sučelje i PWA manifest
+## Zašto sam napravio projekt
 
-## Lokalno pokretanje
-1. Kopiraj `.env.example` u `.env` i postavi `DATABASE_URL` i `JWT_SECRET`.
-2. Pokreni `npm install`.
-3. Pokreni `npx prisma db push`.
-4. Po želji pokreni `npm run seed`.
-5. Pokreni `npm run dev`.
+Postoje Facebook i WhatsApp grupe, ali one nisu prilagođene brzom
+pronalaženju igrača prema gradu, terminu i vrsti igre.
 
-Demo račun nakon seeda: `demo@ekips.hr` / `demo1234`.
+## Trenutno implementirano
+
+- registracija i autentifikacija
+- izrada i pregled događaja
+- pridruživanje događajima
+- grupni chat unutar događaja
+- korisnički profil i postavke
+
+## Poznata ograničenja
+
+- chat trenutačno nije real-time
+- lokacija se unosi tekstualno
+- nema potvrde e-mail adrese
+- administratorske funkcije su osnovne
