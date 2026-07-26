@@ -20,6 +20,3 @@ EKIPS je full-stack responsive web aplikacija za pronalazak, organiziranje i pri
 5. Pokreni `npm run dev`.
 
 Demo račun nakon seeda: `demo@ekips.hr` / `demo1234`.
-
-## Railway
-Dodaj PostgreSQL servis te varijable `DATABASE_URL`, `JWT_SECRET` i opcionalno `ADMIN_EMAIL`. Railway koristi priloženi Dockerfile i `railway.toml`.
