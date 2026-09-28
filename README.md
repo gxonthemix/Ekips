@@ -1,5 +1,7 @@
 # Ekips
 
+[![Build](https://github.com/gxonthemix/Ekips/actions/workflows/build.yml/badge.svg)](https://github.com/gxonthemix/Ekips/actions/workflows/build.yml)
+
 A full-stack web app for finding people to play board games with in your city. Users can create game sessions, join an open session, and chat with other participants.
 
 ## What it demonstrates
